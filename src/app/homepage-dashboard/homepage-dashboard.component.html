@@ -1,0 +1,212 @@
+<div class="container-fluid">
+ <div class="container-fluid">
+    <div class="col-lg-12 ">
+
+   
+    </div>
+    
+    <div class="col-md-12 mainDiv">
+    <div class="Onboardedcounts">Total Rows:{{dataSource.length}}</div>
+     <div class="Onboardedcounts blue">Total Candidates:{{onBoardingcount+ofBoardingnumber}}</div>
+     <div class="Onboardedcounts green">Total Onboarded:{{onBoardingcount}}</div>
+    <div class="Onboardedcounts red">Total Offboarded:{{ofBoardingnumber}}</div>
+  </div>
+         
+</div>
+<br/><br/> 
+
+ <div class="container-fluid" style="display:none;" id="myDiv">
+
+
+<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+			<div class="panel-heading">
+			
+			<div class="row">
+				
+		<div class="col-md-12" style="margin-bottom: -4px;left: 560px;;">
+		
+		<input class="searchBox" type="text" name="search" placeholder="Search.." [(ngModel)]='filtersearch'>
+		
+		
+		
+	 	<button  class="btn btn-success" title="Add New Candidates"
+		  data-toggle="modal" data-target="#exampleModal">Add
+ 			<i class="fa fa-plus-square" style="font-size:18px"></i>
+ 		</button>	
+				
+				
+				</div>
+				</div>
+				
+				</div>
+				<div class="panel-body">
+    <dx-data-grid 
+        id="gridContainer"
+        [dataSource]="dataSource | filter:filtersearch"  (onRowUpdated)="logEvent($event)" 
+(onRowInserting)="saveCandidateDetails($event)" (onRowRemoving)="deleteCandidateInfo($event)" >
+ <dxo-selection mode="multiple"></dxo-selection>
+ <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
+  
+<!-- <dxo-filter-row 
+        [visible]="showFilterRow" 
+        [applyFilter]="currentFilter"></dxo-filter-row>
+    <dxo-header-filter 
+        [visible]="showHeaderFilter"></dxo-header-filter>
+    <dxo-search-panel 
+        [visible]="true" 
+        [width]="240" 
+        placeholder="Search..."></dxo-search-panel> -->
+<dxo-paging [enabled]="true"></dxo-paging>
+
+ <dxo-editing  mode="popup" [allowUpdating]="true"  [allowDeleting]="true"   style="height:200px;">
+  <!-- <dxo-header-filter 
+            [dataSource]="orderHeaderFilter"></dxo-header-filter> -->
+<!-- <dxo-popup title="Employee Info"
+                [showTitle]="true"
+                [width]="1000"
+                [height]="1767"
+                [position]="{ my: 'top', at: 'top', of: window }">  </dxo-popup>-->
+        </dxo-editing>
+        <*ngIf=[allowAdding]="flase"/> 
+     <dxi-column dataField="infosys_EmpNo"  caption="Emp_Id" > <dxi-validation-rule type="required"></dxi-validation-rule></dxi-column>
+    <dxi-column dataField="name"  caption="Name" > <dxi-validation-rule type="required"></dxi-validation-rule></dxi-column>
+    <dxi-column dataField="ncs_ID" caption="NCS_ID"></dxi-column>
+    <dxi-column dataField="ncs_Email" caption="NCS_EMAIL">
+      <dxi-validation-rule type="email"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="contract_Role" caption="Contract_Role">
+       <dxo-lookup [dataSource]="contarctRole">
+        </dxo-lookup>
+     <dxi-validation-rule type="required"></dxi-validation-rule>
+    </dxi-column>
+    <dxi-column dataField="onboardingStatus" caption="Onboarding_Status"></dxi-column>
+    <dxi-column dataField="vac_Onboarding_Date" caption="VAC_OnboardingDate" dataType="date"></dxi-column>
+	<dxi-column dataField="vac_Offboarding_Date"  caption="VAC_OffboardingDate" dataType="date"></dxi-column>
+    </dx-data-grid>
+    </div></div></div></div>
+
+
+</div>
+
+  
+  <div class="loader" id="loader"></div>
+  
+  
+  
+  
+  
+   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Add Candidate Details</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #form1="ngForm" id="needs-validation" novalidate=""
+							(submit)='saveCandidateDetails($event,form1)'>
+							<div class="row">
+								<div class="col-md-4 ">
+									<label for="">Name</label> <input type="text"
+										class="form-control" id="validationCustom01"
+										placeholder="Candidate name" value=""
+										[(ngModel)]="form1.txtName" name="txtName" >
+								</div>
+								<div class="col-md-4 ">
+									<label for="">NCS_ID</label> <input type="text"
+										class="form-control" placeholder="NCSID" value=""
+										[(ngModel)]="form1.txtNCSID" name="txtNCSID"
+										#txtNCSID='ngModel' required>
+								</div>
+								<div class="col-md-4 ">
+									<label for="validationCustom03">NCS_Emailid</label> <input
+										type="text" class="form-control" placeholder="NCS_Emailid"
+										[(ngModel)]="form1.txtNCSEmailid" name="txtNCSEmailid"
+										required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 ">
+									<label for="">Contract-Role</label> <select id="Id"
+										[(ngModel)]="form1.txtContractRole" name="txtContractRole"
+										class="form-control">
+										<option [ngValue]="k" *ngFor="let k of contarctRole">{{k}}
+										</option>
+									</select>
+								</div>
+								<div class="col-md-4 ">
+									<label for="">Onboarding_Status</label> <input type="text"
+										class="form-control" id="validationCustom05"
+										placeholder="Onboarding_Status"
+										[(ngModel)]="form1.txtOnboardingStatus"
+										name="txtOnboardingStatus" required>
+								</div>
+								<div class="col-md-4 ">
+									<label for="validationCustom04">VAC-Onboarding-Date</label> <input
+										type="date" class="form-control" id="validationCustom04"
+										placeholder="VAC-OnBoarding_Date"
+										[(ngModel)]="form1.txtVACOnboardingDate"
+										name="txtVACOnboardingDate" required>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-md-4 ">
+									<label for="validationCustom05">VAC_Offboarding-date</label> <input
+										type="date" class="form-control" id="validationCustom05"
+										placeholder="VAC_Offboarding-date"
+										[(ngModel)]="form1.txtVACOffboardingDate"
+										name="txtVACOffboardingDate" required>
+								</div>
+								<div class="col-md-4 ">
+									<label for="validationCustom05">Employee ID</label> <input
+										type="text" class="form-control" id="validationCustom06"
+										placeholder="employeeno" [(ngModel)]="form1.txtempno"
+										name="txtempno" required>
+								</div>
+								
+                                     <div class="col-md-4 ">
+									<label for="validationCustom05">Employee Resume</label>  <input #myInput type="file"
+                   id="file"
+                   (change)="handleFileInput($event.target.files)">
+								</div>
+   
+    		
+      		<!--   <dx-file-uploader
+           	 selectButtonText="Select photo"
+            labelText=""
+            accept="image/*"
+            uploadMode="useForm">
+        </dx-file-uploader> -->
+   			
+   
+
+								
+								
+							</div>
+							<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit"  class="btn btn-primary" >Save changes</button>
+      </div>
+						</form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ 
+  
+  
+</div>

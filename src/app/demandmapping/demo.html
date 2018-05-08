@@ -1,0 +1,552 @@
+<div class="container-fluid">
+
+
+<div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+				
+				
+				
+				<div class="row">
+				
+				<div class="col-md-12" style="margin-bottom: -4px;left: 1156px;">
+				
+				
+				
+	<input class="searchBox" type="text" name="search" placeholder="Search.." [(ngModel)]='filtersearch'>
+		
+				
+			
+<button  class="btn btn-success" title="Add New Candidates"
+		  data-toggle="modal" data-target="#mappingModel">Add
+ <i class="fa fa-plus-square" style="font-size:18px"></i>
+ </button>				
+ 
+							
+			
+				
+				</div>
+				
+				</div>
+  
+ 
+ 
+ </div>
+
+				
+<div class="panel-body">
+
+
+  <dx-data-grid id="gridContainer"
+    [dataSource]="demandMapping"
+    columnAutoWidth=true
+    rowTemplate="rowTemplateName"  [showBorders]="true"
+    [showRowLines]="true">
+<dxo-export [enabled]="true" fileName="DemandMapping" [allowExportSelectedData]="true"></dxo-export>
+    
+    <dxi-column dataField="demandId" [(ngModel)]="demandId" caption="Demand_ID"></dxi-column>
+      <dxi-column dataField="groupName"  caption="Group" >
+       
+      </dxi-column>
+   
+      <dxi-column dataField="contractRole"  caption="Contract Role" ></dxi-column>
+      <dxi-column dataField="infosysEmpNo" caption="Employe No."></dxi-column>
+      
+     
+       <dxi-column dataField="name" caption="Name"></dxi-column>
+       <dxi-column dataField="customeRoleMapping" caption="Customer_RoleMapping"></dxi-column>
+       
+       
+        
+    <dxi-column dataField="profileSharedDate" caption="Profile_Shared" dataType="date"></dxi-column>
+    
+    <dxi-column dataField="interviewDate" caption="Interview Scheduled" dataType="date"></dxi-column>
+    
+    <dxi-column dataField="clientInformationDate" caption="Cleint-Confirmation" dataType="date">
+    
+    </dxi-column>
+    
+    <dxi-column dataField="psoStatus" caption="PSO_Status" >
+    
+    </dxi-column>
+    
+    <dxi-column dataField="onboardingStatus" caption="OnBording_Status" >
+      
+    
+   	 </dxi-column>
+    
+    
+  <dxi-column dataField="comments" caption="Comments" >
+  
+  
+    
+    </dxi-column>
+
+ 
+  
+    <tbody id="gridContainer" *dxTemplate="let employee of 'rowTemplateName'" >
+     
+     <colgroup><col style="width: 10px;">
+     <col style="width: 30px;">
+     
+     <col style="width: 30px;">
+     <col style="width: 30px;">
+     <col style="width: 30px;">
+     <col style="width: 30px;">
+     <col style="width: 30px;">
+     <col style="width: 30px;">
+     <col style="width: 30px;">
+     <col style="width: 30px;">
+     <col style="width: 30px;">
+     <col style="width: 30px;">
+     <col style="width: 30px;">
+     </colgroup>
+     
+     
+        <tr class="dx-row main-row" style="border:2px">
+          
+          
+            <td>{{employee.data.demandId}}</td>
+            <td>{{employee.data.groupName}}</td>
+            <td>{{employee.data.contractRole}}</td>
+            <td>{{employee.data.infosysEmpNo}}</td>
+            <td>{{employee.data.name }}</td>
+            
+            <td>{{employee.data.customeRoleMapping}}</td>
+            <td>{{employee.data.profileSharedDate| date: "yyyy/MM/dd"}}</td>
+             <td>{{employee.data.interviewDate| date: "yyyy/MM/dd"}}</td>
+            <td>{{employee.data.clientInformationDate| date: "yyyy/MM/dd"}}</td>
+            <td>{{employee.data.psoStatus}}</td>
+            <td>{{employee.data.onboardingStatus }}</td>
+            <td>{{employee.data.comments }}</td>
+           
+        </tr>
+       
+    </tbody>
+</dx-data-grid>
+
+  
+  </div>
+  </div>
+  </div>
+  </div>
+  
+  
+
+ 
+ 
+  
+  
+
+<!-- <dx-data-grid id="gridContainer" [dataSource]="demandMapping">
+
+
+  
+  <dxi-column dataField="contractRole"  caption="Contract Role" ></dxi-column>
+  <dxi-column dataField="infosysEmpNo" caption="Employe No." ></dxi-column>
+      
+    
+  
+   <dxi-column dataField="Picture" [width]="100" [allowFiltering]="false"
+        [allowSorting]="false" cellTemplate="cellTemplate"></dxi-column>
+  <dxo-export [enabled]="true" fileName="DemandMapping" [allowExportSelectedData]="true"></dxo-export>
+   <dxo-selection mode="multiple"></dxo-selection>
+  
+   
+   
+     <tbody class="employee"  *ngFor="let item of demandMapping" >
+        <tr>
+          
+            <td>{{item.demandId}}</td>
+            <td>{{item.name}}</td>
+          
+       </tr>
+      
+    </tbody>
+ <div *dxTemplate="let data of 'cellTemplate'">
+        <button class="btn btn-success" title="Add New Candidates"
+		  data-toggle="modal" data-target="#editmappingModel" (click)="getDemandStatus(item)">Edit</button>
+    </div>
+</dx-data-grid> -->
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+<!--   model -->
+  
+  
+ <div class="modal fade" id="mappingModel" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Add Mapping Details</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #form1="ngForm" id="needs-validation" novalidate=""
+							(submit)='saveMappingDetails(form1)'>
+							<div class="row">
+								<div class="col-md-4 ">
+									<label for="">Demand Id</label> 
+									<input type="text" 
+										class="form-control" id="validationCustom01"
+										placeholder="DemandId" value=""
+										[(ngModel)]="form1.demandId" name="demandId" >
+								</div>
+								
+								
+								
+								<div class="col-md-4 ">
+									<label for="">Group name</label> 
+									
+									<select id="Id"
+										[(ngModel)]="form1.groupName" name="groupName"
+										class="form-control">
+										<option [ngValue]="k" *ngFor="let k of groupNames">{{k}}
+										</option>
+									</select>
+								</div>
+								
+								<div class="col-md-4 ">
+									<label for="">Contract-Role</label> <select id="Id" placeholder="Contract Role"
+										[(ngModel)]="form1.contractRole" name="contractRole"
+										class="form-control">
+										<option [ngValue]="k" *ngFor="let k of contarctRole">{{k}}
+										</option>
+									</select>
+								</div>
+								
+							
+							</div>
+							
+							
+							<div class="row">
+								
+								<div class="col-md-4 ">
+									<label for="">InfosysEmpNo</label> <input type="text"
+										class="form-control" id="validationCustom05"
+										placeholder="Infosys Employee No"
+										[(ngModel)]="form1.infosysEmpNo"
+										name="infosysEmpNo" required>
+								</div>
+								<div class="col-md-4 ">
+									<label for="validationCustom04">Employee Name</label> <input
+										type="text" class="form-control" id="validationCustom04"
+										placeholder="Employee Name"
+										[(ngModel)]="form1.name"
+										name="name" required>
+								</div>
+								
+								
+								
+									<div class="col-md-4 ">
+									<label for="validationCustom04">Customer Role Mapping</label> <input
+										type="text" class="form-control" id="validationCustom04"
+										placeholder="Customer Role Mapping"
+										[(ngModel)]="form1.customeRoleMapping"
+										name="customeRoleMapping" required>
+								</div>
+								
+								
+								
+								
+							</div>
+							<div class="row">
+							
+							
+								<div class="col-md-4 ">
+									<label for="validationCustom05">Profile Shared date</label> <input
+										type="date" class="form-control" id="validationCustom05"
+										placeholder="Profile Shared Date"
+										[(ngModel)]="form1.profileSharedDate"
+										name="profileSharedDate" required>
+								</div>
+								<div class="col-md-4 ">
+									<label for="validationCustom05">Interview Scheduled</label> <input
+										type="date" class="form-control" id="validationCustom06"
+										placeholder="InterviewDate" [(ngModel)]="form1.interviewDate"
+										name="interviewDate" required>
+								</div>
+								
+                                     <div class="col-md-4 ">
+									<label for="validationCustom05">Client-Confirmation</label> <input
+										type="date" class="form-control" id="validationCustom06"
+										placeholder="Client Confirmation" [(ngModel)]="form1.clientInformationDate"
+										name="clientInformationDate" required>
+								</div>
+   
+   
+
+								
+								
+			</div>
+			
+			
+			
+			
+			
+				
+							<div class="row">
+							
+							
+								<div class="col-md-4 ">
+									<label for="">PSO Status</label> <input type="text"
+										class="form-control" id="validationCustom05"
+										placeholder="PSO Status"
+										[(ngModel)]="form1.psoStatus"
+										name="psoStatus" required>
+								</div>
+								<div class="col-md-4 ">
+									<label for="validationCustom04">Onboarding Status</label> <input
+										type="text" class="form-control" id="validationCustom04"
+										placeholder="Onboarding Status"
+										[(ngModel)]="form1.onboardingStatus"
+										name="onboardingStatus" required>
+								</div>
+								
+								
+								
+								
+								
+								</div>
+								
+								<div class="row">
+									<div class="col-md-4 ">
+									<label for="validationCustom04">Comments</label>
+									 <textarea type="text" class="form-control" id="validationCustom04"
+										placeholder="Comments"
+										[(ngModel)]="form1.comments"
+										name="comments" required></textarea>
+								</div>
+						
+							</div>
+			
+			
+
+	<div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit"  class="btn btn-primary" >Save changes</button>
+      </div>
+						</form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+  
+  
+  
+  
+  
+<!--   //edit model -->
+
+  
+   <div class="modal fade" id="editmappingModel" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Add Mapping Details</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #form1="ngForm" id="needs-validation" novalidate=""
+							(submit)='saveMappingDetails(form1)'>
+							
+							<div ngModelGroup='rowValue'>
+							
+								<div class="row">
+								<div class="col-md-4">
+									<label for="">Demand Id</label> 
+									<input type="text"
+										class="form-control" id="validationCustom01"
+										placeholder="DemandId" value=""
+										[ngModel]="demandId" name="demandId" >
+								</div>
+								
+								
+								
+								<div class="col-md-4 ">
+									<label for="">Group name</label> 
+									
+									<select id="Id"
+										[(ngModel)]="form1.groupName" name="groupName"
+										class="form-control">
+										<option [ngValue]="k" *ngFor="let k of groupNames">{{k}}
+										</option>
+									</select>
+								</div>
+								
+								<div class="col-md-4 ">
+									<label for="">Contract-Role</label> <select id="Id" placeholder="Contract Role"
+										[(ngModel)]="form1.contractRole" name="contractRole"
+										class="form-control">
+										<option [ngValue]="k" *ngFor="let k of contarctRole">{{k}}
+										</option>
+									</select>
+								</div>
+								
+							
+							</div>
+							
+							
+							<div class="row">
+								
+								<div class="col-md-4 ">
+									<label for="">InfosysEmpNo</label> <input type="text"
+										class="form-control" id="validationCustom05"
+										placeholder="Infosys Employee No"
+										[(ngModel)]="form1.infosysEmpNo"
+										name="infosysEmpNo" required>
+								</div>
+								<div class="col-md-4 ">
+									<label for="validationCustom04">Employee Name</label> <input
+										type="text" class="form-control" id="validationCustom04"
+										placeholder="Employee Name"
+										[(ngModel)]="form1.name"
+										name="name" required>
+								</div>
+								
+								
+								
+									<div class="col-md-4 ">
+									<label for="validationCustom04">Customer Role Mapping</label> <input
+										type="text" class="form-control" id="validationCustom04"
+										placeholder="Customer Role Mapping"
+										[(ngModel)]="form1.customeRoleMapping"
+										name="customeRoleMapping" required>
+								</div>
+								
+								
+								
+								
+							</div>
+							<div class="row">
+							
+							
+								<div class="col-md-4 ">
+									<label for="validationCustom05">Profile Shared date</label> <input
+										type="date" class="form-control" id="validationCustom05"
+										placeholder="Profile Shared Date"
+										[(ngModel)]="form1.profileSharedDate"
+										name="profileSharedDate" required>
+								</div>
+								<div class="col-md-4 ">
+									<label for="validationCustom05">Interview Scheduled</label> <input
+										type="date" class="form-control" id="validationCustom06"
+										placeholder="InterviewDate" [(ngModel)]="form1.interviewDate"
+										name="interviewDate" required>
+								</div>
+								
+                                     <div class="col-md-4 ">
+									<label for="validationCustom05">Client-Confirmation</label> <input
+										type="date" class="form-control" id="validationCustom06"
+										placeholder="Client Confirmation" [(ngModel)]="form1.clientInformationDate"
+										name="clientInformationDate" required>
+								</div>
+   
+   
+
+								
+								
+			</div>
+			
+			
+			
+			
+			
+				
+							<div class="row">
+							
+							
+								<div class="col-md-4 ">
+									<label for="">PSO Status</label> <input type="text"
+										class="form-control" id="validationCustom05"
+										placeholder="PSO Status"
+										[(ngModel)]="form1.psoStatus"
+										name="psoStatus" required>
+								</div>
+								<div class="col-md-4 ">
+									<label for="validationCustom04">Onboarding Status</label> <input
+										type="text" class="form-control" id="validationCustom04"
+										placeholder="Onboarding Status"
+										[(ngModel)]="form1.onboardingStatus"
+										name="onboardingStatus" required>
+								</div>
+								
+								
+								
+								
+								
+								</div>
+								
+								<div class="row">
+									<div class="col-md-4 ">
+									<label for="validationCustom04">Comments</label>
+									 <textarea type="text" class="form-control" id="validationCustom04"
+										placeholder="Comments"
+										[(ngModel)]="form1.comments"
+										name="comments" required></textarea>
+								</div>
+						
+							</div>
+			
+			
+
+	<div class="modal-footer">
+							</div>
+						
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit"  class="btn btn-primary" >Save changes</button>
+      </div>
+	</form>
+      </div>
+     
+    </div>
+  </div>
+</div>
+  
+  
+  
+  
+  
+  
+  	</div>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  

@@ -1,0 +1,152 @@
+  <div class="container">
+  <div class="row">
+		<div class="col-md-12">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">Add Candidate Details</h3>
+			
+				</div>
+				<div class="panel-body">
+             <div class="mT-30">
+    <form #form1="ngForm"  id="needs-validation" novalidate="" (submit)='saveCandidateDetails(form1)'>
+    <div class="row">
+        <div class="col-md-4 ">
+          <label for="">Name</label>
+          <input type="text" class="form-control" id="validationCustom01" placeholder="Candidate name" value="" 
+          [(ngModel)]="form1.txtName"
+        name="txtName"   required  autofocus>
+      
+        </div>
+
+      <div class="col-md-4 ">
+        <label for="">NCS_ID</label>
+        <input type="text" class="form-control"
+      placeholder="NCSID" value="" [(ngModel)]="form1.txtNCSID"
+        name="txtNCSID"   #txtNCSID='ngModel'  required  >
+      </div>
+
+
+
+      <div class="col-md-4 ">
+        
+        <label for="validationCustom03">NCS_Emailid</label>
+        <input type="text" class="form-control"  placeholder="NCS_Emailid"
+        [(ngModel)]="form1.txtNCSEmailid" name="txtNCSEmailid" 
+        required  >
+      
+
+  </div>
+  </div>
+    
+    
+   
+  <div class="row">
+     
+
+
+
+    <div class="col-md-4 ">
+      <label for="">Contract-Role</label>
+      
+       <select id="Id" [(ngModel)]="form1.txtContractRole" name="txtContractRole"   
+       class="form-control">  
+      <option [ngValue]="k" *ngFor="let k of contarctRole">{{k}} </option>  
+         </select>  
+      
+      </div>
+     
+     
+     
+    
+    
+
+
+
+    <div class="col-md-4 ">
+        <label for="">Onboarding_Status</label>
+        <input type="text" class="form-control" id="validationCustom05" placeholder="Onboarding_Status"
+         [(ngModel)]="form1.txtOnboardingStatus" name="txtOnboardingStatus" 
+        required >
+
+      </div>
+      
+
+      <div class="col-md-4 ">
+          <label for="validationCustom04">VAC-Onboarding-Date</label>
+          <input type="date" class="form-control" id="validationCustom04" placeholder="VAC-OnBoarding_Date" 
+          [(ngModel)]="form1.txtVACOnboardingDate"  name="txtVACOnboardingDate"
+          required  >
+         
+       </div>
+
+      
+      </div>
+
+
+
+
+
+      <div class="row">
+          
+    
+    
+        <div class="col-md-4 ">
+            <label for="validationCustom05">VAC_Offboarding-date</label>
+          <input type="date" class="form-control" id="validationCustom05" placeholder="VAC_Offboarding-date" 
+          [(ngModel)]="form1.txtVACOffboardingDate" name="txtVACOffboardingDate"  
+          required >
+    
+            
+          
+          </div>
+          
+          
+          
+          
+          
+          <div class="col-md-4 ">
+            <label for="validationCustom05">Employee ID</label>
+          <input type="text" class="form-control" id="validationCustom06" placeholder="employeeno" 
+          [(ngModel)]="form1.txtempno"  name="txtempno" 
+          required >
+    
+            
+          
+          </div>
+          
+          
+          
+          
+          
+          
+          </div>
+
+
+
+
+
+     <div class="row">
+        <div class="col-md-4 ">
+      <button class="btn btn-primary"  type="submit">Save
+
+      </button>
+      </div>
+    </div>
+    
+    </form>
+
+          </div>
+          
+          
+         
+        
+        
+        </div>
+			</div>
+    </div>
+
+  </div>
+
+</div>
+
+    

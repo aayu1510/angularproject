@@ -1,0 +1,28 @@
+.navbar-inverse {
+    background-color: #1291ea;
+    border-color: #080808;
+}
+.navbar-inverse .navbar-nav>li>a {
+    color: #fffdfd;
+}
+
+li{
+    padding: 8px;
+  }
+  
+  a{
+    text-decoration: none;
+    color: #000;
+  }
+  
+  a:hover, a:focus{
+    color: red;
+    text-decoration: none;
+    outline: none;
+  }
+  
+  .navbar-inverse .navbar-nav>li>a.active{
+   
+    color: red;
+    border-bottom: 5px solid red;
+  }

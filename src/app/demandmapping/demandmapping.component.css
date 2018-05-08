@@ -1,0 +1,52 @@
+.search-icon{
+	  width: %;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    float: right;    
+    border-radius: 30px;
+    font-size: 16px;
+    background-color: white;
+  
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 8px 20px 8px 40px;
+}
+
+.left-addon .fa-search
+{
+	position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+.searchBox {
+    width: %;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+/*     float: right;     */
+    border-radius: 30px;
+    font-size: 16px;
+    background-color: white;
+  /* background-image: url('searchicon.png'); */  
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 8px 20px 8px 40px;
+   
+}
+table {
+    border:none;
+    border-collapse: collapse;
+}
+
+ td {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+ td:first-child {
+    border-left: none;
+}
+
+ td:last-child {
+    border-right: none;
+}
